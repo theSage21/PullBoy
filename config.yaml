@@ -1,0 +1,6 @@
+lastbencher:
+    workdir: '~/squad/lastbencher'
+    script:
+        - git pull origin master
+        - make deploy
+    token: 'thisisnosecret'
