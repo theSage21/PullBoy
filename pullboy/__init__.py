@@ -20,15 +20,15 @@ def main():
     with open(args.config_file, 'r') as fl:
         config = yaml.load(fl.read())
 
-    @app.get('/deploy')
+    @app.post('/deploy')
     def deploy():
-        token = bottle.request.query.token
-        proj = bottle.request.query.project or None
+        token = bottle.request.forms.get("token")
+        proj = bottle.request.forms.get("project")
         if proj is None:
             raise bottle.HTTPError(404, body='No Project Provided')
         if proj not in config:
             raise bottle.HTTPError(404, body='Unknown Project')
-        if config[proj]['token'].strip() != token.strip():
+        if token is None or config[proj]['token'].strip() != token.strip():
             raise bottle.HTTPError(403, body='Invalid Token')
         # - project provided, exists and token matches
         for cmd in config[proj]['script']:

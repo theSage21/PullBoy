@@ -1,5 +1,5 @@
-lastbencher:
-    workdir: '~/squad/lastbencher'
+pullboy:
+    workdir: '~/pullboy'
     script:
         - git pull origin master
         - make deploy

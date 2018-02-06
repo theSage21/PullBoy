@@ -23,6 +23,12 @@ That's it.
 
 To make pullboy deploy something all you need to do is hit the following URL.
 
-`http://wherever.pullboy.is.running.com:8764/deploy?project=pullboy&token=thisisnosecret`
+`https://wherever.pullboy.is.running.com:8764/deploy` with the items `project` and `token` in the POST body. **HTTPS is recommended**.
 
-Two query parameters are required. `project` and `token`. Tokens are menat to be kept a secret otherwise anyone with access to this URL can deploy the code (we don't want it to be that simple do we?).
+Tokens are meant to be kept a secret otherwise anyone with access to this URL can deploy the code (we don't want it to be that simple do we?).
+
+An example cURL command to deploy the project shown in the config above would be:
+
+```bash
+curl -X POST -F project=pullboy -F token=thisisnosecret https://wherever.pullboy.is.running.com:8764/deploy`
+```
