@@ -18,7 +18,7 @@ pullboy:
 ```
 
 
-I sometimes use it to update my servers where the pullboy config is as below. The important thing is that all commands are end in a reasonable time. The `fuser` command kills the process using 8000 as a tcp port (which is the previous instance of the server.
+I sometimes use it to update my servers where the pullboy config is as below. The important thing is that all commands end in a reasonable time. The `fuser` command kills the process using 8000 as a tcp port (which is the previous instance of the server.
 
 ```yaml
 pullboyserver:
