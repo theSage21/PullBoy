@@ -17,13 +17,13 @@ def main():
                         help='Host to run server on')
     args = parser.parse_args()
     app = bottle.Bottle()
-    with open(args.config_file, 'r') as fl:
-        config = yaml.load(fl.read())
 
     @app.post('/deploy')
     def deploy():
         token = bottle.request.forms.get("token")
         proj = bottle.request.forms.get("project")
+        with open(args.config_file, 'r') as fl:
+            config = yaml.load(fl.read())
         if proj is None:
             raise bottle.HTTPError(404, body='No Project Provided')
         if proj not in config:
