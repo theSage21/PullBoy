@@ -17,6 +17,20 @@ pullboy:
     token: 'thisisnosecret'
 ```
 
+
+I sometimes use it to update my servers where the pullboy config is as below. The important thing is that all commands are end in a reasonable time. The `fuser` command kills the process using 8000 as a tcp port (which is the previous instance of the server.
+
+```yaml
+pullboyserver:
+    workdir: '~/myserver'
+    script:
+        - git pull origin master
+        - make
+        - fuser -k 8000/tcp
+        - pipenv run python myserver.py &
+    token: 'this is no secret'
+```
+
 Now we run pullboy with the following command `pullboy config.yaml`.
 
 That's it.

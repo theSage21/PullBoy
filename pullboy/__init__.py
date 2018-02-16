@@ -35,7 +35,8 @@ def main():
             cmd = 'cd ' + config[proj]['workdir'] + ' && ' + cmd
             status = call(cmd, shell=True)
             if status != 0:
-                raise bottle.HTTPError(500, body='Script raised an error')
+                string = '< {} > had exit code {}'.format(cmd, status)
+                raise bottle.HTTPError(500, string)
         return 'Deployed'
 
     app.run(port=args.port, host=args.interface)
