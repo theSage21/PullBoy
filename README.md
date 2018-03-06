@@ -15,6 +15,7 @@ pullboy:
         - git pull origin master
         - make
     token: 'thisisnosecret'
+    active: true  # This is optional. Default is assumed to be true
 ```
 
 
@@ -29,6 +30,7 @@ pullboyserver:
         - fuser -k 8000/tcp
         - pipenv run python myserver.py &
     token: 'this is no secret'
+    active: true
 ```
 
 Now we run pullboy with the following command `pullboy config.yaml`.

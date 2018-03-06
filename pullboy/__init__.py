@@ -31,6 +31,10 @@ def main():
         if token is None or config[proj]['token'].strip() != token.strip():
             raise bottle.HTTPError(403, body='Invalid Token')
         # - project provided, exists and token matches
+        if not config[proj].get('active', True):
+            msg = "This project's auto deploy is set to inactive at this time"
+            raise bottle.HTTPError(404, body=msg)
+        # - only if it is active
         for cmd in config[proj]['script']:
             cmd = 'cd ' + config[proj]['workdir'] + ' && ' + cmd
             status = call(cmd, shell=True)

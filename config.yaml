@@ -4,3 +4,4 @@ pullboy:
         - git pull origin master
         - make deploy
     token: 'thisisnosecret'
+    active: true
