@@ -46,6 +46,10 @@ Tokens are meant to be kept a secret otherwise anyone with access to this URL ca
 
 ```bash
 curl -X POST -F project=pullboy -F token=thisisnosecret https://wherever.pullboy.is.running.com:8764/deploy`
+curl -X POST -F project=pullboy -F token=thisisnosecret https://wherever.pullboy.is.running.com:8764/cleanupdatabase`
+curl -X POST -F project=pullboy -F token=thisisnosecret https://wherever.pullboy.is.running.com:8764/pullboy/deploy`
 ```
+
+The url does not matter, whatever URL you access, pullboy will be ready to work. This makes it easy to use with a reverse proxy like Nginx where you can forward a url like `/pullboy/deployments/ci` and `/pullboy/deployments/manual` to Pullboy. The Nginx logs can act as *logs* for deployments.
 
 [Let's Encrypt](https://letsencrypt.org/) is the recommended way to obtain HTTPS but in case you are using your laptop for something, [ngrok](https://ngrok.com/) is a neat way to get HTTPS.

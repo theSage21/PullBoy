@@ -18,7 +18,7 @@ def main():
     args = parser.parse_args()
     app = bottle.Bottle()
 
-    @app.post('/deploy')
+    @app.post('/<:re:.*>')
     def deploy():
         token = bottle.request.forms.get("token")
         proj = bottle.request.forms.get("project")
