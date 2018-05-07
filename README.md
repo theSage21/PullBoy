@@ -45,9 +45,11 @@ To make pullboy deploy something all you need to do is hit `https://wherever.pul
 Tokens are meant to be kept a secret otherwise anyone with access to this URL can deploy the code (we don't want it to be that simple do we?).  An example cURL command to deploy the project shown in the config above would be:
 
 ```bash
-curl -X POST -F project=pullboy -F token=thisisnosecret https://wherever.pullboy.is.running.com:8764/deploy`
-curl -X POST -F project=pullboy -F token=thisisnosecret https://wherever.pullboy.is.running.com:8764/cleanupdatabase`
-curl -X POST -F project=pullboy -F token=thisisnosecret https://wherever.pullboy.is.running.com:8764/pullboy/deploy`
+curl -X POST -F project=pullboy -F token=thisisnosecret https://wherever.pullboy.is.running.com:8764/deploy
+curl -X POST -F project=pullboy -F token=thisisnosecret https://wherever.pullboy.is.running.com:8764/pullboy/deploy
+curl -X POST -F project=pullboy -F token=thisisnosecret https://wherever.pullboy.is.running.com:8764/pullboy/deploy/user
+curl -X POST -F project=pullboy -F token=thisisnosecret https://wherever.pullboy.is.running.com:8764/pullboy/deploy/ci
+curl -X POST -F project=pullboy -F token=thisisnosecret https://wherever.pullboy.is.running.com:8764/pullboy/deploy/bossman
 ```
 
 The url does not matter, whatever URL you access, pullboy will be ready to work. This makes it easy to use with a reverse proxy like Nginx where you can forward a url like `/pullboy/deployments/ci` and `/pullboy/deployments/manual` to Pullboy. The Nginx logs can act as *logs* for deployments.
