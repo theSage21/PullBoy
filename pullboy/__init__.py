@@ -18,10 +18,14 @@ def main():
     args = parser.parse_args()
     app = bottle.Bottle()
 
-    @app.post('/<:re:.*>')
+    @app.route('/<:re:.*>', method=['GET', 'POST'])
     def deploy():
-        token = bottle.request.forms.get("token")
-        proj = bottle.request.forms.get("project")
+        if bottle.request.method == 'GET':
+            token = bottle.request.query.get('token')
+            proj = bottle.request.query.get('proj')
+        else:
+            token = bottle.request.forms.get("token")
+            proj = bottle.request.forms.get("project")
         with open(args.config_file, 'r') as fl:
             config = yaml.load(fl.read())
         if proj is None:
@@ -42,5 +46,6 @@ def main():
                 string = '< {} > had exit code {}'.format(cmd, status)
                 raise bottle.HTTPError(500, string)
         return 'Deployed'
+
 
     app.run(port=args.port, host=args.interface)
