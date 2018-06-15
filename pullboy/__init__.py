@@ -22,7 +22,7 @@ def main():
     def deploy():
         if bottle.request.method == 'GET':
             token = bottle.request.query.get('token')
-            proj = bottle.request.query.get('proj')
+            proj = bottle.request.query.get('project')
         else:
             token = bottle.request.forms.get("token")
             proj = bottle.request.forms.get("project")
