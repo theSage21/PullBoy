@@ -18,20 +18,23 @@ pullboy:
     active: true  # This is optional. Default is assumed to be true
 ```
 
+For Gitlab you can add push events in the [webhooks](https://gitlab.com/help/user/project/integrations/webhooks) and pullboy will take care of auto deploy for you. Here we don't really need a project name so we can have a config like so:
 
-I sometimes use it to update my servers where the pullboy config is as below. The important thing is that all commands end in a reasonable time. The `fuser` command kills the process using 8000 as a tcp port (which is the previous instance of the server.
 
 ```yaml
-pullboyserver:
-    workdir: '~/myserver'
+a_token_for_gitlab_to_identify_the_script:
+    workdir: '~/pullboy'
     script:
         - git pull origin master
         - make
-        - fuser -k 8000/tcp
-        - pipenv run python myserver.py &
-    token: 'this is no secret'
     active: true
+    branch: master
+    gitlab: true
 ```
+
+We can now add a gitlab webhook which has the secret token as `a_token_for_gitlab_to_identify_the_script`. That's all there is to it. Now whenever someone pushes to the repo and it's the master branch. the script will be executed.
+
+
 
 Now we run pullboy with the following command `pullboy config.yaml`.
 

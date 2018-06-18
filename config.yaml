@@ -5,3 +5,10 @@ pullboy:
         - make deploy
     token: 'thisisnosecret'
     active: true
+asecrettokenforgitlab:
+    workdir: '~/pullboy'
+    script:
+        - echo 'hi'
+    active: true
+    branch: master
+    gitlab: true
