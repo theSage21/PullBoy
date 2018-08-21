@@ -16,6 +16,7 @@ def main():
                         default='0.0.0.0',
                         help='Host to run server on')
     args = parser.parse_args()
+    bottle.BaseRequest.MEMFILE_MAX = 1024**3 # bytes
     app = bottle.Bottle()
 
     @app.route('/<:re:.*>', method=['GET', 'POST'])
