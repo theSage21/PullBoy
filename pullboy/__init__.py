@@ -16,15 +16,15 @@ def main():
                         default='0.0.0.0',
                         help='Host to run server on')
     args = parser.parse_args()
-    bottle.BaseRequest.MEMFILE_MAX = 1024**3 # bytes
+    bottle.BaseRequest.MEMFILE_MAX = 1024**3  # bytes
     app = bottle.Bottle()
 
     @app.route('/<:re:.*>', method=['GET', 'POST'])
     def deploy():
         xgitlab = bottle.request.headers.get('X-Gitlab-Token')
+        with open(args.config_file, 'r') as fl:
+            config = yaml.load(fl.read())
         if xgitlab is not None:  # Gitlab webhook
-            with open(args.config_file, 'r') as fl:
-                config = yaml.load(fl.read())
             if xgitlab not in config:
                 raise bottle.HTTPError(404, body='No Project Provided')
             if not config[xgitlab].get('gitlab', False):
