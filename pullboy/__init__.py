@@ -15,7 +15,15 @@ def main():
     parser.add_argument('-i', '--interface', action='store',
                         default='0.0.0.0',
                         help='Host to run server on')
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        default=False,
+                        help='Print out details of web requests?')
     args = parser.parse_args()
+
+    def log(*a, **kw):
+        if args.verbose:
+            print(*a, **kw)
+
     bottle.BaseRequest.MEMFILE_MAX = 1024**3  # bytes
     app = bottle.Bottle()
 
@@ -25,6 +33,7 @@ def main():
         with open(args.config_file, 'r') as fl:
             config = yaml.load(fl.read())
         if xgitlab is not None:  # Gitlab webhook
+            log('gitlab request', xgitlab)
             if xgitlab not in config:
                 raise bottle.HTTPError(404, body='No Project Provided')
             if not config[xgitlab].get('gitlab', False):
@@ -40,6 +49,7 @@ def main():
             if bottle.request.method == 'POST':
                 token = bottle.request.forms.get("token")
                 proj = bottle.request.forms.get("project")
+                log(proj, token)
             if proj is None:
                 raise bottle.HTTPError(404, body='No Project Provided')
             if proj not in config:

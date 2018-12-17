@@ -1,6 +1,6 @@
 from setuptools import setup
 
-__version__ = ['0.81']
+__version__ = ['0.82']
 
 setup(name='pullboy',
       version='.'.join(__version__),
