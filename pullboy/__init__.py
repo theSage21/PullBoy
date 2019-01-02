@@ -61,8 +61,10 @@ def main():
             msg = "This project's auto deploy is set to inactive at this time"
             raise bottle.HTTPError(404, body=msg)
         # - only if it is active
+        env = ' '.join(key + '=' + value for key, value in config[proj].get('environment', {}).items())
+        env = env.strip() + ' '
         for cmd in config[proj]['script']:
-            cmd = 'cd ' + config[proj]['workdir'] + ' && ' + cmd
+            cmd = env + 'cd ' + config[proj]['workdir'] + ' && ' + cmd
             status = call(cmd, shell=True)
             if status != 0:
                 string = '< {} > had exit code {}'.format(cmd, status)

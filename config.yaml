@@ -6,6 +6,9 @@ pullboy:
     token: 'thisisnosecret'
     active: true
 asecrettokenforgitlab:
+    environment:
+        - SOME_ENV_FLAG: '1'
+        - SOME_ENV_FLAG2: '2'
     workdir: '~/pullboy'
     script:
         - echo 'hi'

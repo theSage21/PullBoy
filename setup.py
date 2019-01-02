@@ -1,10 +1,10 @@
 from setuptools import setup
 
-__version__ = ['0.82']
+__version__ = ['0.90']
 
 setup(name='pullboy',
       version='.'.join(__version__),
-      description='Super Simply Auto-Deployment server',
+      description='Super Simple Auto-Deployment server',
       url='http://gitlab.com/theSage21/pullboy',
       author='Arjoonn Sharma',
       author_email='arjoonn.94@gmail.com',
