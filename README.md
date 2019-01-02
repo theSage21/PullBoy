@@ -32,6 +32,8 @@ a_token_for_gitlab_to_identify_the_script:
     gitlab: true
 ```
 
+See [config.yml](config.yml) for a full example.
+
 We can now add a gitlab webhook which has the secret token as `a_token_for_gitlab_to_identify_the_script`. That's all there is to it. Now whenever someone pushes to the repo and it's the master branch. the script will be executed.
 
 

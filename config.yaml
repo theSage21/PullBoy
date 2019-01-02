@@ -7,11 +7,11 @@ pullboy:
     active: true
 asecrettokenforgitlab:
     environment:
-        - SOME_ENV_FLAG: '1'
-        - SOME_ENV_FLAG2: '2'
+        - DB_USER_NAME: '1'
+        - DB_PWD: '2'
     workdir: '~/pullboy'
     script:
-        - echo 'hi'
+        - echo 'run my fancy web server'
     active: true
     branch: master
     gitlab: true
