@@ -15,12 +15,12 @@ def main():
                         default='8764',
                         help='Port to run server on')
     parser.add_argument('-i', '--interface', action='store',
-                        default='0.0.0.0',
+                        default='127.0.0.1',
                         help='Host to run server on')
     parser.add_argument('-v', '--verbose', action='store_true',
                         default=False,
                         help='Print out details of web requests?')
-    parser.add_argument('--deploy_path', action='store', default='/home/ubuntu/public_www', help='Where to put the deployment files?')
+    parser.add_argument('--deploy_path', action='store', default='/home/ubuntu', help='Where to put the deployment files?')
     parser.add_argument('--temp_path', action='store', default='/tmp/pullboy_build.tar', help='Where to put the tar file temporarily?')
     parser.add_argument('--deploy_secret', action='store', help='The secret to use for deployment')
     args = parser.parse_args()
