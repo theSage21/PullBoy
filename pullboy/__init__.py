@@ -1,5 +1,7 @@
 import yaml
+import shutil
 import bottle
+import tarfile
 import argparse
 from subprocess import call
 
@@ -18,6 +20,9 @@ def main():
     parser.add_argument('-v', '--verbose', action='store_true',
                         default=False,
                         help='Print out details of web requests?')
+    parser.add_argument('--deploy_path', action='store', default='/home/ubuntu/public_www', help='Where to put the deployment files?')
+    parser.add_argument('--temp_path', action='store', default='/tmp/pullboy_build.tar', help='Where to put the tar file temporarily?')
+    parser.add_argument('--deploy_secret', action='store', help='The secret to use for deployment')
     args = parser.parse_args()
 
     def log(*a, **kw):
@@ -26,6 +31,16 @@ def main():
 
     bottle.BaseRequest.MEMFILE_MAX = 1024**3  # bytes
     app = bottle.Bottle()
+
+    @app.route('/deploy', method=['POST'])
+    def copy_and_unzip():
+        secret = bottle.request.forms.get("secret")
+        if secret == args.deploy_secret:
+            built = bottle.request.files.get("built")
+            built.save(args.temp_path, overwrite=True)
+            with tarfile.open(args.temp_path) as tar:
+                tar.extractall(args.deploy_path)
+                
 
     @app.route('/<:re:.*>', method=['GET', 'POST'])
     def deploy():
